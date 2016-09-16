@@ -1,11 +1,13 @@
 use tap_test::TapTest;
 
+/// Represents a collection of TAP tests (TapTest) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
 #[derive(Debug)]
 pub struct TapSuite {
     pub tests: Vec<TapTest>,
 }
 
 impl TapSuite {
+    /// Produce and arrange all text lines, in order, included in this TAP stream.
     pub fn lines(&self) -> Vec<String> {
         let first_line = format!("1..{}", self.tests.len());
         let mut all_lines = vec![first_line];
@@ -19,6 +21,7 @@ impl TapSuite {
         all_lines
     }
 
+    /// Emit TAP stream to standard output.
     pub fn print(&self) {
         for line in self.lines() {
             println!("{}", line);

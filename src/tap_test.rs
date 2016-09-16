@@ -1,12 +1,16 @@
-
+/// A test, a collection of which (a TapSuite) will be rendered into a TAP text stream. A TapTest knows how to render itself.
 #[derive(Debug)]
 pub struct TapTest {
+    /// The name of the test, will be the primary text on a TAP test line
     pub name: String,
+    /// Did this test pass?
     pub passed: bool,
+    /// If this test merits additional comments, they will be rendered in the TAP stream beginning with a # mark.
     pub commentary: Vec<String>,
 }
 
 impl TapTest {
+    /// Based on the test passing status, yield either "ok" or "not ok".
     pub fn ok_string(&self) -> String {
         let result = if self.passed {
             "ok"
@@ -17,22 +21,27 @@ impl TapTest {
         result.to_string()
     }
 
+    /// Produce a properly-formatted TAP line. This excludes commentary.
     pub fn status_line(&self, test_number: i64) -> String {
         format!("{} {} {}", self.ok_string(), test_number, self.name)
     }
 
+    /// Produce all lines (inclusive of commentary) representing this test. This is the money, right here.
     pub fn tap(&self, test_number: i64) -> Vec<String> {
+        // Build the first line
         let mut lines = vec![self.status_line(test_number)];
+        // If there are commentary lines, format them.
         let formatted_commentary = self.commentary
             .iter()
             .map(|comment| self.format_commentary(comment))
             .collect::<Vec<String>>();
-        
+
         lines.extend(formatted_commentary.iter().cloned());
 
         lines
     }
 
+    /// Commentary should begin with a # mark
     pub fn format_commentary(&self, line: &str) -> String {
         format!("# {}", line)
     }
