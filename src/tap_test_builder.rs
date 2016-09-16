@@ -1,6 +1,16 @@
 use tap_test::TapTest;
 
-/// Coordinator for construction of TapTest objects using the builder pattern.
+/// Coordinator for construction of `TapTest` objects using the builder pattern.
+///
+/// # Examples
+///
+/// ```
+/// let tap_test = TapTestBuilder::new()
+///     .name("Panda test")
+///     .passed(true)
+///     .commentary(vec!["Something something something".to_string()])
+///     .finalize();
+/// ```
 #[derive(Debug)]
 pub struct TapTestBuilder {
     name: String,
@@ -9,7 +19,7 @@ pub struct TapTestBuilder {
 }
 
 impl TapTestBuilder {
-    /// Produce a blank TapTest (the default is a passing test)
+    /// Produce a blank `TapTest` (the default is a passing test)
     pub fn new() -> TapTestBuilder {
         TapTestBuilder { name: "".to_string(), passed: true, commentary: vec![] }
     }
@@ -28,7 +38,7 @@ impl TapTestBuilder {
         self.commentary = comments;
         self
     }
-    /// Produce the actual TapTest object.
+    /// Produce the actual `TapTest` object.
     pub fn finalize(&self) -> TapTest {
         TapTest {
             name: self.name.to_string(),

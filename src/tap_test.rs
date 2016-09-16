@@ -1,4 +1,4 @@
-/// A test, a collection of which (a TapSuite) will be rendered into a TAP text stream. A TapTest knows how to render itself.
+/// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
 #[derive(Debug)]
 pub struct TapTest {
     /// The name of the test, will be the primary text on a TAP test line

@@ -1,9 +1,9 @@
 use tap_test::TapTest;
 
-/// Represents a collection of TAP tests (TapTest) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
+/// Represents a collection of TAP tests (`TapTest`) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
 #[derive(Debug)]
 pub struct TapSuite {
-    /// The collection of TapTest objects included in this test group, to be rendered into a TAP stream.
+    /// The collection of `TapTest` objects included in this test group, to be rendered into a TAP stream.
     pub tests: Vec<TapTest>,
 }
 
