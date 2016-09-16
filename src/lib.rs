@@ -1,4 +1,4 @@
-/// TapTest -- The core, representing an individual test.
+/// TapTest -- The core, representing an individual TAP test.
 pub mod tap_test;
 /// TapTestBuilder -- Helper for creating a TapTest using the builder pattern.
 pub mod tap_test_builder;

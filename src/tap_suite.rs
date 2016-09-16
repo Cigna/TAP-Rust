@@ -3,18 +3,20 @@ use tap_test::TapTest;
 /// Represents a collection of TAP tests (TapTest) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
 #[derive(Debug)]
 pub struct TapSuite {
+    /// The collection of TapTest objects included in this test group, to be rendered into a TAP stream.
     pub tests: Vec<TapTest>,
 }
 
 impl TapSuite {
-    /// Produce and arrange all text lines, in order, included in this TAP stream.
+    /// Produce and arrange all text lines, in order, included in this TAP stream. This includes the leading plan line which is calculated based on the number of tests.
     pub fn lines(&self) -> Vec<String> {
+        // Make plan line
         let first_line = format!("1..{}", self.tests.len());
         let mut all_lines = vec![first_line];
 
         for (i, test) in self.tests.iter().enumerate() {
-            let index = i as i64;
-            let tap = test.tap(index + 1);
+            let index = i as i64; // by default i is a usize.
+            let tap = test.tap(index + 1); // TAP tests can't start with zero
             all_lines.extend(tap.iter().cloned());
         }
 

@@ -51,7 +51,7 @@ impl TapTest {
 #[cfg(test)]
 mod tests {
     use super::TapTest;
-    
+
     #[test]
     fn test_tap_test_status_string() {
         let tap_test_passing = TapTest {
@@ -62,7 +62,7 @@ mod tests {
 
         let expected_passing = "ok";
         let actual_passing = tap_test_passing.ok_string();
-        
+
         assert_eq!(expected_passing, actual_passing);
 
         let tap_test_failing = TapTest {
@@ -73,8 +73,8 @@ mod tests {
 
         let expected_failing = "not ok";
         let actual_failing = tap_test_failing.ok_string();
-        
-        assert_eq!(expected_failing, actual_failing);        
+
+        assert_eq!(expected_failing, actual_failing);
     }
 
     #[test]
@@ -98,8 +98,8 @@ mod tests {
 
         let expected_failing = "not ok 42 Panda";
         let actual_failing = tap_test_failing.status_line(42);
-        
-        assert_eq!(expected_failing, actual_failing);        
+
+        assert_eq!(expected_failing, actual_failing);
 
     }
 
@@ -114,7 +114,7 @@ mod tests {
         let expected_passing = vec!["ok 42 Panda", "# Doing fine"];
         let actual_passing = tap_test_passing.tap(42);
 
-        assert_eq!(expected_passing, actual_passing);        
+        assert_eq!(expected_passing, actual_passing);
     }
 
     #[test]
@@ -128,6 +128,6 @@ mod tests {
         let expected_passing = "# Doing fine";
         let actual_passing = tap_test_passing.format_commentary(&tap_test_passing.commentary[0]);
 
-        assert_eq!(expected_passing, actual_passing);        
+        assert_eq!(expected_passing, actual_passing);
     }
 }
