@@ -8,6 +8,26 @@ struct TapSuite {
     tests: Vec<TapTest>,
 }
 
+impl TapSuite {
+    fn lines(&self) -> Vec<String> {
+        let mut all_lines = Vec::new();
+
+        for (i, test) in self.tests.iter().enumerate() {
+            let index = i as i64;
+            let tap = test.tap(index);
+            all_lines.extend(tap.iter().cloned());
+        }
+
+        all_lines
+    }
+
+    fn print(&self) {
+        for line in self.lines() {
+            println!("{}", line);
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     //use super::{TapTest, TapSuite, TapTestBuilder};
@@ -93,8 +113,22 @@ mod tests {
             commentary: vec!["Doing fine".to_string()],
         };
 
-        let expected_passing = vec!["ok 42 Panda", "Doing fine"];
+        let expected_passing = vec!["ok 42 Panda", "# Doing fine"];
         let actual_passing = tap_test_passing.tap(42);
+
+        assert_eq!(expected_passing, actual_passing);        
+    }
+
+    #[test]
+    fn test_format_commentary() {
+        let tap_test_passing = TapTest {
+            name: "Panda".to_string(),
+            passed: true,
+            commentary: vec!["Doing fine".to_string()],
+        };
+
+        let expected_passing = "# Doing fine";
+        let actual_passing = tap_test_passing.format_commentary(&tap_test_passing.commentary[0]);
 
         assert_eq!(expected_passing, actual_passing);        
     }

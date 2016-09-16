@@ -22,8 +22,17 @@ impl TapTest {
 
     pub fn tap(&self, test_number: i64) -> Vec<String> {
         let mut lines = vec![self.status_line(test_number)];
-        lines.extend(self.commentary.iter().cloned());
+        let formatted_commentary = self.commentary
+            .iter()
+            .map(|comment| self.format_commentary(comment))
+            .collect::<Vec<String>>();
+
+        lines.extend(formatted_commentary.iter().cloned());
 
         lines
+    }
+
+    pub fn format_commentary(&self, line: &str) -> String {
+        format!("# {}", line)
     }
 }
