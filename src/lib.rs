@@ -1,58 +1,11 @@
 mod tap_test;
 mod tap_test_builder;
+mod tap_suite;
 
-use tap_test::TapTest;
-
-#[derive(Debug)]
-struct TapSuite {
-    tests: Vec<TapTest>,
-}
-
-impl TapSuite {
-    fn lines(&self) -> Vec<String> {
-        let mut all_lines = Vec::new();
-
-        for (i, test) in self.tests.iter().enumerate() {
-            let index = i as i64;
-            let tap = test.tap(index);
-            all_lines.extend(tap.iter().cloned());
-        }
-
-        all_lines
-    }
-
-    fn print(&self) {
-        for line in self.lines() {
-            println!("{}", line);
-        }
-    }
-}
 
 #[cfg(test)]
 mod tests {
-    //use super::{TapTest, TapSuite, TapTestBuilder};
-    use tap_test::TapTest;
-    use tap_test_builder::TapTestBuilder;
-    
-    #[test]
-    fn test_tap_test_builder() {
-        let tap_test_from_builder = TapTestBuilder::new()
-            .name("Panda")
-            .passed(true)
-            .commentary(vec!["Doing fine".to_string()])
-            .finalize();
-
-        let tap_test_from_scratch = TapTest {
-            name: "Panda".to_string(),
-            passed: true,
-            commentary: vec!["Doing fine".to_string()],
-        };
-
-        let expected = format!("{:?}", tap_test_from_builder);
-        let actual = format!("{:?}", tap_test_from_scratch);
-        
-        assert_eq!(expected, actual);
-    }
+    use tap_test::TapTest;    
 
     #[test]
     fn test_tap_test_status_string() {

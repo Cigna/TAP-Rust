@@ -26,7 +26,7 @@ impl TapTest {
             .iter()
             .map(|comment| self.format_commentary(comment))
             .collect::<Vec<String>>();
-
+        
         lines.extend(formatted_commentary.iter().cloned());
 
         lines
