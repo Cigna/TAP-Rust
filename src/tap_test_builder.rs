@@ -5,23 +5,25 @@ use tap_test::TapTest;
 /// # Examples
 ///
 /// ```
+/// use tap::tap_test_builder::TapTestBuilder;
+///
 /// let tap_test = TapTestBuilder::new()
 ///     .name("Panda test")
 ///     .passed(true)
-///     .commentary(vec!["Something something something".to_string()])
+///     .diagnostics(vec!["Something something something".to_string()])
 ///     .finalize();
 /// ```
 #[derive(Debug)]
 pub struct TapTestBuilder {
     name: String,
     passed: bool,
-    commentary: Vec<String>,
+    diagnostics: Vec<String>,
 }
 
 impl TapTestBuilder {
     /// Produce a blank `TapTest` (the default is a passing test)
     pub fn new() -> TapTestBuilder {
-        TapTestBuilder { name: "".to_string(), passed: true, commentary: vec![] }
+        TapTestBuilder { name: "".to_string(), passed: true, diagnostics: vec![] }
     }
     /// Set test name
     pub fn name(&mut self, s: &str) -> &mut TapTestBuilder {
@@ -33,9 +35,9 @@ impl TapTestBuilder {
         self.passed = status;
         self
     }
-    /// Set commentary. This can be any number of lines.
-    pub fn commentary(&mut self, comments: Vec<String>) -> &mut TapTestBuilder {
-        self.commentary = comments;
+    /// Set diagnostics. This can be any number of lines.
+    pub fn diagnostics(&mut self, comments: Vec<String>) -> &mut TapTestBuilder {
+        self.diagnostics = comments;
         self
     }
     /// Produce the actual `TapTest` object.
@@ -43,7 +45,7 @@ impl TapTestBuilder {
         TapTest {
             name: self.name.to_string(),
             passed: self.passed,
-            commentary: self.commentary.iter().map(|c| c.to_string() ).collect::<Vec<String>>(),
+            diagnostics: self.diagnostics.iter().map(|c| c.to_string() ).collect::<Vec<String>>(),
         }
     }
 }
@@ -58,13 +60,13 @@ mod tests {
         let tap_test_from_builder = TapTestBuilder::new()
             .name("Panda")
             .passed(true)
-            .commentary(vec!["Doing fine".to_string()])
+            .diagnostics(vec!["Doing fine".to_string()])
             .finalize();
 
         let tap_test_from_scratch = TapTest {
             name: "Panda".to_string(),
             passed: true,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected = format!("{:?}", tap_test_from_builder);

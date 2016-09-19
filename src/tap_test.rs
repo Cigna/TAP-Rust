@@ -5,8 +5,8 @@ pub struct TapTest {
     pub name: String,
     /// Did this test pass?
     pub passed: bool,
-    /// If this test merits additional comments, they will be rendered in the TAP stream beginning with a # mark.
-    pub commentary: Vec<String>,
+    /// If this test merits additional comments (diagnostics, in TAP parlance), they will be rendered in the TAP stream beginning with a # mark.
+    pub diagnostics: Vec<String>,
 }
 
 impl TapTest {
@@ -21,28 +21,28 @@ impl TapTest {
         result.to_string()
     }
 
-    /// Produce a properly-formatted TAP line. This excludes commentary.
+    /// Produce a properly-formatted TAP line. This excludes diagnostics.
     pub fn status_line(&self, test_number: i64) -> String {
         format!("{} {} {}", self.ok_string(), test_number, self.name)
     }
 
-    /// Produce all lines (inclusive of commentary) representing this test. This is the money, right here.
+    /// Produce all lines (inclusive of diagnostics) representing this test. This is the money, right here.
     pub fn tap(&self, test_number: i64) -> Vec<String> {
         // Build the first line
         let mut lines = vec![self.status_line(test_number)];
-        // If there are commentary lines, format them.
-        let formatted_commentary = self.commentary
+        // If there are diagnostics lines, format them.
+        let formatted_diagnostics = self.diagnostics
             .iter()
-            .map(|comment| self.format_commentary(comment))
+            .map(|comment| self.format_diagnostics(comment))
             .collect::<Vec<String>>();
 
-        lines.extend(formatted_commentary.iter().cloned());
+        lines.extend(formatted_diagnostics.iter().cloned());
 
         lines
     }
 
-    /// Commentary should begin with a # mark
-    pub fn format_commentary(&self, line: &str) -> String {
+    /// Diagnostics should begin with a # mark
+    pub fn format_diagnostics(&self, line: &str) -> String {
         format!("# {}", line)
     }
 }
@@ -57,7 +57,7 @@ mod tests {
         let tap_test_passing = TapTest {
             name: "Panda".to_string(),
             passed: true,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected_passing = "ok";
@@ -68,7 +68,7 @@ mod tests {
         let tap_test_failing = TapTest {
             name: "Panda".to_string(),
             passed: false,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected_failing = "not ok";
@@ -82,7 +82,7 @@ mod tests {
         let tap_test_passing = TapTest {
             name: "Panda".to_string(),
             passed: true,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected_passing = "ok 42 Panda";
@@ -93,7 +93,7 @@ mod tests {
         let tap_test_failing = TapTest {
             name: "Panda".to_string(),
             passed: false,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected_failing = "not ok 42 Panda";
@@ -108,7 +108,7 @@ mod tests {
         let tap_test_passing = TapTest {
             name: "Panda".to_string(),
             passed: true,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected_passing = vec!["ok 42 Panda", "# Doing fine"];
@@ -118,15 +118,15 @@ mod tests {
     }
 
     #[test]
-    fn test_format_commentary() {
+    fn test_format_diagnostics() {
         let tap_test_passing = TapTest {
             name: "Panda".to_string(),
             passed: true,
-            commentary: vec!["Doing fine".to_string()],
+            diagnostics: vec!["Doing fine".to_string()],
         };
 
         let expected_passing = "# Doing fine";
-        let actual_passing = tap_test_passing.format_commentary(&tap_test_passing.commentary[0]);
+        let actual_passing = tap_test_passing.format_diagnostics(&tap_test_passing.diagnostics[0]);
 
         assert_eq!(expected_passing, actual_passing);
     }

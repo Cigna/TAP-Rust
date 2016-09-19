@@ -46,7 +46,7 @@ mod tests {
         let failing_test = TapTestBuilder::new()
             .name("Curry Noodle")
             .passed(false)
-            .commentary(vec!["Tree".to_string(), "Flower".to_string()])
+            .diagnostics(vec!["Tree".to_string(), "Flower".to_string()])
             .finalize();
 
         let tap_suite = TapSuite {
