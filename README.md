@@ -6,6 +6,16 @@ This Rust library provides facilities for the generating and emitting results in
 
 Please see the examples in the `examples` folder.
 
+Simple:
+
+```
+1..2
+ok 1 Panda Bamboo
+not ok 2 Curry Noodle
+# Tree
+# Flower
+```
+
 ## Testing
 
 `cargo test`
