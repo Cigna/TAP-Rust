@@ -45,7 +45,7 @@ impl TapTestBuilder {
         TapTest {
             name: self.name.to_string(),
             passed: self.passed,
-            diagnostics: self.diagnostics.iter().map(|c| c.to_string() ).collect::<Vec<String>>(),
+            diagnostics: self.diagnostics.clone(),
         }
     }
 }
@@ -69,10 +69,7 @@ mod tests {
             diagnostics: vec!["Doing fine".to_string()],
         };
 
-        let expected = format!("{:?}", tap_test_from_builder);
-        let actual = format!("{:?}", tap_test_from_scratch);
-        
-        assert_eq!(expected, actual);
+        assert_eq!(tap_test_from_builder, tap_test_from_scratch);
     }
 
 }

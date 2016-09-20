@@ -47,6 +47,14 @@ impl TapTest {
     }
 }
 
+impl PartialEq for TapTest {
+    fn eq(&self, other: &TapTest) -> bool {
+        self.name == other.name
+            && self.passed == other.passed
+            && self.diagnostics == other.diagnostics
+    }
+}
+
 
 #[cfg(test)]
 mod tests {

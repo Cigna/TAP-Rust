@@ -9,6 +9,7 @@ use tap_test::TapTest;
 /// use tap::tap_suite_builder::TapSuiteBuilder;
 /// use tap::tap_test_builder::TapTestBuilder;
 ///
+/// // Make a Vec<TapTest> so we have something
 /// let tests = vec![TapTestBuilder::new()
 ///                  .name("Example TAP test")
 ///                  .passed(true)
@@ -20,6 +21,7 @@ use tap_test::TapTest;
 ///     .finalize();
 ///
 /// ```
+#[derive(Debug)]
 pub struct TapSuiteBuilder {
     /// Name of test suite
     pub name: String,
@@ -47,15 +49,10 @@ impl TapSuiteBuilder {
         TapSuite {
             name: self.name.to_string(),
             tests: self.tests.iter().map(|test| {
-                let diagnostics = test.diagnostics
-                    .iter()
-                    .map(|s| s.to_string())
-                    .collect::<Vec<String>>();
-
                 TapTest {
                     name: test.name.to_string(),
                     passed: test.passed,
-                    diagnostics: diagnostics,
+                    diagnostics: test.diagnostics.clone(),
                 }
             }).collect()
         }
@@ -88,9 +85,6 @@ mod test {
                         .finalize()],
         };
 
-        let actual = format!("{:?}", tap_suite_from_builder);
-        let expected = format!("{:?}", tap_suite_from_scratch);
-
-        assert_eq!(expected, actual);
+        assert_eq!(tap_suite_from_builder, tap_suite_from_scratch);
     }
 }

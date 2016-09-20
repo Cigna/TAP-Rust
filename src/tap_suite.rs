@@ -33,6 +33,13 @@ impl TapSuite {
     }
 }
 
+impl PartialEq for TapSuite {
+    fn eq(&self, other: &TapSuite) -> bool {
+        self.name == other.name
+            && self.tests == other.tests
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::TapSuite;

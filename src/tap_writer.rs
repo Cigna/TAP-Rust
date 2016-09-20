@@ -1,6 +1,6 @@
-use tap_test::TapTest;
-
 /// A named TAP stream writer. This will print directly to STDOUT as you call methods. No waiting.
+/// See examples/stream.rs for usage.
+#[derive(Debug)]
 pub struct TapWriter {
     /// TAP stream name
     pub name: String,
