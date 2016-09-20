@@ -6,3 +6,5 @@ pub mod tap_test_builder;
 pub mod tap_suite;
 /// TapTestBuilder -- Helper for creating a `TapTestSuite` using the builder pattern
 pub mod tap_suite_builder;
+/// TapWriter -- For writing TAP streams incrementally
+pub mod tap_writer;
