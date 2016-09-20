@@ -1,3 +1,6 @@
+const OK_SYMBOL: &'static str = "ok";
+const NOT_OK_SYMBOL: &'static str = "not ok";
+
 /// TapTest -- The core, representing an individual TAP test.
 pub mod tap_test;
 /// TapTestBuilder -- Helper for creating a `TapTest` using the builder pattern.
@@ -8,3 +11,4 @@ pub mod tap_suite;
 pub mod tap_suite_builder;
 /// TapWriter -- For writing TAP streams incrementally
 pub mod tap_writer;
+

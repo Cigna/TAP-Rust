@@ -1,3 +1,5 @@
+use super::{OK_SYMBOL, NOT_OK_SYMBOL};
+
 /// A named TAP stream writer. This will print directly to STDOUT as you call methods. No waiting.
 /// See examples/stream.rs for usage.
 #[derive(Debug)]
@@ -28,12 +30,12 @@ impl TapWriter {
 
     /// Emit a passing test line.
     pub fn ok(&self, test_number: i32, message: &str) {
-        println!("ok {} {}", test_number, message);
+        println!("{} {} {}", OK_SYMBOL, test_number, message);
     }
 
     /// Emit a failing test line.
     pub fn not_ok(&self, test_number: i32, message: &str) {
-        println!("not ok {} {}", test_number, message);
+        println!("{} {} {}", NOT_OK_SYMBOL, test_number, message);
     }
 
     /// Emit a diagnostic message. Prefaced with a #.

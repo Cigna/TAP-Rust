@@ -1,3 +1,5 @@
+use super::{OK_SYMBOL, NOT_OK_SYMBOL};
+
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
 #[derive(Debug)]
 pub struct TapTest {
@@ -13,9 +15,9 @@ impl TapTest {
     /// Based on the test passing status, yield either "ok" or "not ok".
     pub fn ok_string(&self) -> String {
         let result = if self.passed {
-            "ok"
+            OK_SYMBOL
         } else {
-            "not ok"
+            NOT_OK_SYMBOL
         };
 
         result.to_string()
@@ -59,6 +61,8 @@ impl PartialEq for TapTest {
 #[cfg(test)]
 mod tests {
     use super::TapTest;
+    use ::OK_SYMBOL;
+    use ::NOT_OK_SYMBOL;
 
     #[test]
     fn test_tap_test_status_string() {
@@ -68,7 +72,7 @@ mod tests {
             diagnostics: vec!["Doing fine".to_string()],
         };
 
-        let expected_passing = "ok";
+        let expected_passing = OK_SYMBOL;
         let actual_passing = tap_test_passing.ok_string();
 
         assert_eq!(expected_passing, actual_passing);
@@ -79,7 +83,7 @@ mod tests {
             diagnostics: vec!["Doing fine".to_string()],
         };
 
-        let expected_failing = "not ok";
+        let expected_failing = NOT_OK_SYMBOL;
         let actual_failing = tap_test_failing.ok_string();
 
         assert_eq!(expected_failing, actual_failing);
