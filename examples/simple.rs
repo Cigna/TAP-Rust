@@ -17,6 +17,7 @@ fn main() {
         .finalize();
 
     let tap_suite = TapSuite {
+        name: "Example TAP Suite".to_string(),
         tests: vec![passing_test, failing_test],
     };
 

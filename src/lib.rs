@@ -4,3 +4,5 @@ pub mod tap_test;
 pub mod tap_test_builder;
 /// TapSuite -- A collection of `TapTest` objects renderable into a TAP text stream
 pub mod tap_suite;
+/// TapTestBuilder -- Helper for creating a `TapTestSuite` using the builder pattern
+pub mod tap_suite_builder;
