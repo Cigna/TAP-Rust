@@ -10,7 +10,7 @@ use tap_test::TapTest;
 /// let tap_test = TapTestBuilder::new()
 ///     .name("Panda test")
 ///     .passed(true)
-///     .diagnostics(vec!["Something something something".to_string()])
+///     .diagnostics(vec!["Something something something"])
 ///     .finalize();
 /// ```
 #[derive(Debug)]
@@ -36,8 +36,8 @@ impl TapTestBuilder {
         self
     }
     /// Set diagnostics. This can be any number of lines.
-    pub fn diagnostics(&mut self, comments: Vec<String>) -> &mut TapTestBuilder {
-        self.diagnostics = comments;
+    pub fn diagnostics(&mut self, comments: Vec<&str>) -> &mut TapTestBuilder {
+        self.diagnostics = comments.iter().map(|s| s.to_string()).collect();
         self
     }
     /// Produce the actual `TapTest` object.
@@ -60,7 +60,7 @@ mod tests {
         let tap_test_from_builder = TapTestBuilder::new()
             .name("Panda")
             .passed(true)
-            .diagnostics(vec!["Doing fine".to_string()])
+            .diagnostics(vec!["Doing fine"])
             .finalize();
 
         let tap_test_from_scratch = TapTest {

@@ -2,9 +2,10 @@
 extern crate tap;
 
 use tap::tap_test_builder::TapTestBuilder;
-use tap::tap_suite::TapSuite;
+use tap::tap_suite_builder::TapSuiteBuilder;
 
 fn main() {
+    // Make some tests
     let passing_test = TapTestBuilder::new()
         .name("Panda Bamboo")
         .passed(true)
@@ -13,13 +14,14 @@ fn main() {
     let failing_test = TapTestBuilder::new()
         .name("Curry Noodle")
         .passed(false)
-        .diagnostics(vec!["Tree".to_string(), "Flower".to_string()])
+        .diagnostics(vec!["Tree", "Flower"])
         .finalize();
 
-    let tap_suite = TapSuite {
-        name: "Example TAP Suite".to_string(),
-        tests: vec![passing_test, failing_test],
-    };
-
+    // Build the suite
+    let tap_suite = TapSuiteBuilder::new()
+        .name("Example TAP Suite")
+        .tests(vec![passing_test, failing_test])
+        .finalize();
+    
     tap_suite.print();
 }
