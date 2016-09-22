@@ -1,7 +1,7 @@
 use super::{OK_SYMBOL, NOT_OK_SYMBOL};
 
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TapTest {
     /// The name of the test, will be the primary text on a TAP test line
     pub name: String,

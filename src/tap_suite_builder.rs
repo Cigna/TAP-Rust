@@ -21,7 +21,7 @@ use tap_test::TapTest;
 ///     .finalize();
 ///
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TapSuiteBuilder {
     /// Name of test suite
     pub name: String,
@@ -48,13 +48,7 @@ impl TapSuiteBuilder {
     pub fn finalize(&mut self) -> TapSuite {
         TapSuite {
             name: self.name.to_string(),
-            tests: self.tests.iter().map(|test| {
-                TapTest {
-                    name: test.name.to_string(),
-                    passed: test.passed,
-                    diagnostics: test.diagnostics.clone(),
-                }
-            }).collect()
+            tests: self.tests.clone(),
         }
     }
 }

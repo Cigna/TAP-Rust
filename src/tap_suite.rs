@@ -1,7 +1,7 @@
 use tap_test::TapTest;
 
 /// Represents a collection of TAP tests (`TapTest`) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TapSuite {
     /// The name of the suite. If this is a blank string, that's fine but it's considered a party foul.
     pub name: String,
