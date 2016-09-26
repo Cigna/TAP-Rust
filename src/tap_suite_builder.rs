@@ -35,8 +35,8 @@ impl TapSuiteBuilder {
         TapSuiteBuilder { name: None, tests: None }
     }
     /// Set the name
-    pub fn name(&mut self, s: &str) -> &mut TapSuiteBuilder {
-        self.name = Some(s.to_string());
+    pub fn name<S: Into<String>>(&mut self, s: S) -> &mut TapSuiteBuilder {
+        self.name = Some(s.into());
         self
     }
     /// Set the tests
