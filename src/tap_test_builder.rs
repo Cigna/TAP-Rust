@@ -15,37 +15,41 @@ use tap_test::TapTest;
 /// ```
 #[derive(Debug)]
 pub struct TapTestBuilder {
-    name: String,
-    passed: bool,
-    diagnostics: Vec<String>,
+    name: Option<String>,
+    passed: Option<bool>,
+    diagnostics: Option<Vec<String>>,
 }
 
 impl TapTestBuilder {
     /// Produce a blank `TapTest` (the default is a passing test)
     pub fn new() -> TapTestBuilder {
-        TapTestBuilder { name: "".to_string(), passed: true, diagnostics: vec![] }
+        TapTestBuilder {
+            name: None,
+            passed: None,
+            diagnostics: None
+        }
     }
     /// Set test name
-    pub fn name(&mut self, s: &str) -> &mut TapTestBuilder {
-        self.name = s.to_string();
+    pub fn name<S: Into<String>>(&mut self, s: S) -> &mut TapTestBuilder {
+        self.name = Some(s.into());
         self
     }
     /// Set passed status
     pub fn passed(&mut self, status: bool) -> &mut TapTestBuilder {
-        self.passed = status;
+        self.passed = Some(status);
         self
     }
     /// Set diagnostics. This can be any number of lines.
     pub fn diagnostics(&mut self, comments: Vec<&str>) -> &mut TapTestBuilder {
-        self.diagnostics = comments.iter().map(|s| s.to_string()).collect();
+        self.diagnostics = Some(comments.iter().map(|s| s.to_string()).collect());
         self
     }
-    /// Produce the actual `TapTest` object.
-    pub fn finalize(&self) -> TapTest {
+    /// Produce the configured `TapTest` object. Panics if you don't pass a passed status.
+    pub fn finalize(&mut self) -> TapTest {
         TapTest {
-            name: self.name.to_string(),
-            passed: self.passed,
-            diagnostics: self.diagnostics.clone(),
+            name: self.name.take().unwrap_or("A test has no name".to_string()),
+            passed: self.passed.take().expect("You build a test but didn't say whether or not it passed"),
+            diagnostics: self.diagnostics.take().unwrap_or(Vec::new()),
         }
     }
 }
@@ -72,4 +76,21 @@ mod tests {
         assert_eq!(tap_test_from_builder, tap_test_from_scratch);
     }
 
+    #[test]
+    fn test_tap_test_builder_with_no_name() {
+        let bad_tap_test = TapTestBuilder::new()
+            .passed(true)
+            .finalize();
+
+        let expected = "A test has no name";
+        assert_eq!(bad_tap_test.name, expected);
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_tap_test_builder_with_no_passed_status() {
+        TapTestBuilder::new()
+            .name("This should break")
+            .finalize();
+    }
 }

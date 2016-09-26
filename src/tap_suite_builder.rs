@@ -24,31 +24,31 @@ use tap_test::TapTest;
 #[derive(Debug, Clone)]
 pub struct TapSuiteBuilder {
     /// Name of test suite
-    pub name: String,
+    pub name: Option<String>,
     /// Vector of type `Vec<TapTest>` which holds the actual tests
-    pub tests: Vec<TapTest>,
+    pub tests: Option<Vec<TapTest>>,
 }
 
 impl TapSuiteBuilder {
     /// Produce a new builder object
     pub fn new() -> TapSuiteBuilder {
-        TapSuiteBuilder { name: "".to_string(), tests: vec![] }
+        TapSuiteBuilder { name: None, tests: None }
     }
     /// Set the name
     pub fn name(&mut self, s: &str) -> &mut TapSuiteBuilder {
-        self.name = s.to_string();
+        self.name = Some(s.to_string());
         self
     }
     /// Set the tests
     pub fn tests(&mut self, test_vec: Vec<TapTest>) -> &mut TapSuiteBuilder {
-        self.tests = test_vec;
+        self.tests = Some(test_vec);
         self
     }
-    /// Produce the configured `TapSuite` object
+    /// Produce the configured `TapSuite` object. Name defaults to a blank `String` and the tests default to an empty `Vec`.
     pub fn finalize(&mut self) -> TapSuite {
         TapSuite {
-            name: self.name.to_string(),
-            tests: self.tests.clone(),
+            name: self.name.take().unwrap_or("".to_string()),
+            tests: self.tests.take().unwrap_or(Vec::new()),
         }
     }
 }
