@@ -57,6 +57,15 @@ impl PartialEq for TapTest {
     }
 }
 
+impl Into<String> for TapTest {
+    fn into(self) -> String {
+        format!("TapTest(name: {}, passed: {}, diagnostics: {:?})",
+                self.name,
+                self.passed,
+                self.diagnostics)
+    }
+}
+
 
 #[cfg(test)]
 mod tests {
