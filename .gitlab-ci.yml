@@ -10,7 +10,6 @@ variables:
   HTTPS_PROXY: https://appdevproxy.cigna.com:8080
   
 before_script:
-  - git config --global url."http://".insteadOf git://
   - rustup run nightly cargo install clippy
   
 test:
