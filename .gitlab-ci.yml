@@ -1,4 +1,4 @@
-image: liuchong/rustup
+image: quay.sys.cigna.com/c63094/rustup
 
 stages:
   - test
