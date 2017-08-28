@@ -5,6 +5,10 @@ stages:
   - style
   - docs
 
+variables:
+  HTTP_PROXY: http://appdevproxy.cigna.com:8080
+  HTTPS_PROXY: https://appdevproxy.cigna.com:8080
+  
 before_script:
   - rustup run nightly cargo install clippy
   
