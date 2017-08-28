@@ -5,12 +5,12 @@ stages:
   - style
   - docs
 
-# variables:
-#   HTTP_PROXY: http://appdevproxy.cigna.com:8080
-#   HTTPS_PROXY: https://appdevproxy.cigna.com:8080
+cache:
+  - target
   
 before_script:
   - rustup update
+  - rustup install nightly
   - rustup run nightly cargo install clippy
   
 test:
