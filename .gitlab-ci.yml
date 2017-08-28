@@ -6,7 +6,8 @@ stages:
   - docs
 
 cache:
-  - target
+  paths:
+    - target
   
 before_script:
   - rustup update
