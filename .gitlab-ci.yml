@@ -6,7 +6,7 @@ stages:
   - docs
 
 before_script:
-  - rustup run nightlight cargo install clippy
+  - rustup run nightly cargo install clippy
   
 test:
   stage: test
