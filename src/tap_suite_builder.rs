@@ -21,7 +21,7 @@ use tap_test::TapTest;
 ///     .finalize();
 ///
 /// ```
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct TapSuiteBuilder {
     /// Name of test suite
     pub name: Option<String>,
@@ -47,8 +47,8 @@ impl TapSuiteBuilder {
     /// Produce the configured `TapSuite` object. Name defaults to a blank `String` and the tests default to an empty `Vec`.
     pub fn finalize(&mut self) -> TapSuite {
         TapSuite {
-            name: self.name.take().unwrap_or("".to_string()),
-            tests: self.tests.take().unwrap_or(Vec::new()),
+            name: self.name.take().unwrap_or_else(|| "".to_string()),
+            tests: self.tests.take().unwrap_or_else(Vec::new),
         }
     }
 }

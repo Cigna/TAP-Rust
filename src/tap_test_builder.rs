@@ -13,7 +13,7 @@ use tap_test::TapTest;
 ///     .diagnostics(vec!["Something something something"])
 ///     .finalize();
 /// ```
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct TapTestBuilder {
     name: Option<String>,
     passed: Option<bool>,
@@ -47,9 +47,9 @@ impl TapTestBuilder {
     /// Produce the configured `TapTest` object. Panics if you don't pass a passed status.
     pub fn finalize(&mut self) -> TapTest {
         TapTest {
-            name: self.name.take().unwrap_or("A test has no name".to_string()),
+            name: self.name.take().unwrap_or_else(|| "A test has no name".to_string()),
             passed: self.passed.take().expect("You build a test but didn't say whether or not it passed"),
-            diagnostics: self.diagnostics.take().unwrap_or(Vec::new()),
+            diagnostics: self.diagnostics.take().unwrap_or_else(Vec::new),
         }
     }
 }
