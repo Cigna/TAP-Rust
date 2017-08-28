@@ -1,0 +1,24 @@
+image: liuchong/rustup
+
+stages:
+  - test
+  - style
+  - docs
+
+before_script:
+  - rustup run nightlight cargo install clippy
+  
+test:
+  stage: test
+  script:
+    - cargo test
+
+style:
+  stage: style
+  script:
+    - rustup run nightly cargo clippy
+
+docs:
+  stage: docs
+  script:
+    - cargo doc
