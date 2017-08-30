@@ -1,8 +1,8 @@
 
-extern crate tap;
+extern crate tap_rust;
 
-use tap::tap_test_builder::TapTestBuilder;
-use tap::tap_suite_builder::TapSuiteBuilder;
+use tap_rust::tap_test_builder::TapTestBuilder;
+use tap_rust::tap_suite_builder::TapSuiteBuilder;
 
 fn main() {
     // Make some tests

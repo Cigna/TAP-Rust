@@ -1,7 +1,7 @@
 
-extern crate tap;
+extern crate tap_rust;
 
-use tap::tap_writer::TapWriter;
+use tap_rust::tap_writer::TapWriter;
 
 fn main() {
     let writer = TapWriter::new("Example TAP stream");

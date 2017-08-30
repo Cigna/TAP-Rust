@@ -5,7 +5,7 @@ use tap_test::TapTest;
 /// # Examples
 ///
 /// ```
-/// use tap::tap_test_builder::TapTestBuilder;
+/// use tap_rust::tap_test_builder::TapTestBuilder;
 ///
 /// let tap_test = TapTestBuilder::new()
 ///     .name("Panda test")
