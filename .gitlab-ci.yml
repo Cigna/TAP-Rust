@@ -2,26 +2,26 @@ image: quay.sys.cigna.com/c63094/rustup
 
 stages:
   - test
-  - style
+#  - style
   - docs
 
 cache:
   paths:
     - target
   
-before_script:
-  - rustup update
-  - rustup run nightly cargo install clippy
+# before_script:
+#   - rustup update
+#   - rustup run nightly cargo install clippy
   
 test:
   stage: test
   script:
     - cargo test
 
-style:
-  stage: style
-  script:
-    - rustup run nightly cargo clippy
+# style:
+#   stage: style
+#   script:
+#     - rustup run nightly cargo clippy
 
 docs:
   stage: docs
