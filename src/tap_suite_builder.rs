@@ -6,8 +6,8 @@ use tap_test::TapTest;
 /// # Examples
 ///
 /// ```
-/// use tap::tap_suite_builder::TapSuiteBuilder;
-/// use tap::tap_test_builder::TapTestBuilder;
+/// use tap_rust::tap_suite_builder::TapSuiteBuilder;
+/// use tap_rust::tap_test_builder::TapTestBuilder;
 ///
 /// // Make a Vec<TapTest> so we have something
 /// let tests = vec![TapTestBuilder::new()

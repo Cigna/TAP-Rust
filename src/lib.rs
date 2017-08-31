@@ -11,8 +11,8 @@
 //! Behold! The `TapSuite`
 //!
 //! ```
-//! use tap::tap_test_builder::TapTestBuilder;
-//! use tap::tap_suite_builder::TapSuiteBuilder;
+//! use tap_rust::tap_test_builder::TapTestBuilder;
+//! use tap_rust::tap_suite_builder::TapSuiteBuilder;
 //!
 //! // Cons up a failing test
 //! let failing_tap_test = TapTestBuilder::new()
@@ -35,7 +35,7 @@
 //! Behold, the `TapWriter`!
 //!
 //! ```
-//! use tap::tap_writer::TapWriter;
+//! use tap_rust::tap_writer::TapWriter;
 //!
 //! let writer = TapWriter::new("Example TAP stream");
 //!
