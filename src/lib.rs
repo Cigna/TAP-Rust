@@ -1,12 +1,12 @@
 //! The Test Anything Protocol (TAP) is a plaintext format for expressing test results. It has been around since 1987 when it was invented to help test Perl. With this crate, this wonderfully-useful tool has been brought to Rust!
 //!
-//! This crate provides the machinery needed for producing and emitting TAP streams. Since the TAP specification requires that TAP be emitted to STDOUT, we don't get fancy with stream interfaces.
+//! This crate provides the machinery needed for producing and emitting TAP streams. Since the TAP specification requires that TAP be emitted to STDOUT, we don't get fancy with any of the stream interfaces.
 //!
 //! For working, executable examples, please see the `examples` directory.
 //!
 //! # Examples
 //!
-//! The first method for producing a TAP stream is the `TapSuite` mechanism. This will come in handy when you're iterating over a collection and want to `map` it to a collection of `TapTest` results. We supply a `TapSuiteBuilder` and a `TapTestBuilder` to make this as smooth as possible.
+//! The first method for producing a TAP stream is the `TapSuite` mechanism. This will come in handy when you're iterating over a collection and want to `map` it to a collection of `TapTest` results. We supply a `TapSuiteBuilder` and a `TapTestBuilder` to make this as nice as possible.
 //!
 //! Behold! The `TapSuite`
 //!
