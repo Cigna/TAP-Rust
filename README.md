@@ -19,3 +19,7 @@ not ok 2 Curry Noodle
 ## Testing
 
 `cargo test`
+
+## License
+
+Apache License Version 2.0
