@@ -3,4 +3,8 @@ name = "tap-rust"
 version = "0.1.0"
 authors = ["Jonathan E. Magen <jonathan.magen@cigna.com>"]
 
+license = "Apache-2.0"
+license-file = "LICENSE-APACHE.txt"
+homepage = "https://github.com/cigna/tap-rust"
+repository = "https://github.com/cigna/tap-rust"
 [dependencies]
