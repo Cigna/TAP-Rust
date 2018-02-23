@@ -3,6 +3,7 @@ name = "tap-rust"
 version = "0.1.0"
 authors = ["Jonathan E. Magen <jonathan.magen@cigna.com>"]
 
+description = "Generate results in the Test Anything Protocol (TAP)"
 license = "Apache-2.0"
 license-file = "LICENSE-APACHE.txt"
 homepage = "https://github.com/cigna/tap-rust"
