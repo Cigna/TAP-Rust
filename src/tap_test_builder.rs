@@ -40,7 +40,7 @@ impl TapTestBuilder {
         self
     }
     /// Set diagnostics. This can be any number of lines.
-    pub fn diagnostics(&mut self, comments: Vec<&str>) -> &mut TapTestBuilder {
+    pub fn diagnostics(&mut self, comments: &[&str]) -> &mut TapTestBuilder {
         self.diagnostics = Some(comments.iter().map(|s| s.to_string()).collect());
         self
     }

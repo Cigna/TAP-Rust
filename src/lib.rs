@@ -62,9 +62,9 @@
 //!
 
 /// Global constant for the "ok"
-const OK_SYMBOL: &'static str = "ok";
+const OK_SYMBOL: &str = "ok";
 /// Global constant for the "not ok"
-const NOT_OK_SYMBOL: &'static str = "not ok";
+const NOT_OK_SYMBOL: &str = "not ok";
 
 /// `TapTest` -- The core, representing an individual TAP test.
 pub mod tap_test;
