@@ -14,7 +14,7 @@ fn main() {
     let failing_test = TapTestBuilder::new()
         .name("Curry Noodle")
         .passed(false)
-        .diagnostics(vec!["Tree", "Flower"])
+        .diagnostics(&vec!["Tree", "Flower"])
         .finalize();
 
     // Build the suite

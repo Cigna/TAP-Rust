@@ -18,7 +18,7 @@
 //! let failing_tap_test = TapTestBuilder::new()
 //!     .name("Example TAP test")
 //!     .passed(false)
-//!     .diagnostics(vec!["This test failed because of X"])
+//!     .diagnostics(&vec!["This test failed because of X"])
 //!     .finalize();
 //!
 //! // 

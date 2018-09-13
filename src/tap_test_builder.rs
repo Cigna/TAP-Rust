@@ -10,7 +10,7 @@ use tap_test::TapTest;
 /// let tap_test = TapTestBuilder::new()
 ///     .name("Panda test")
 ///     .passed(true)
-///     .diagnostics(vec!["Something something something"])
+///     .diagnostics(&vec!["Something something something"])
 ///     .finalize();
 /// ```
 #[derive(Debug, Default)]
@@ -64,7 +64,7 @@ mod tests {
         let tap_test_from_builder = TapTestBuilder::new()
             .name("Panda")
             .passed(true)
-            .diagnostics(vec!["Doing fine"])
+            .diagnostics(&vec!["Doing fine"])
             .finalize();
 
         let tap_test_from_scratch = TapTest {
