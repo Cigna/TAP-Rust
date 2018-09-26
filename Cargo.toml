@@ -1,6 +1,6 @@
 [package]
 name = "testanything"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Jonathan E. Magen <jonathan.magen@cigna.com>"]
 
 description = "Generate results in the Test Anything Protocol (TAP)"
