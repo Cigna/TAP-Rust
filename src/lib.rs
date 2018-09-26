@@ -11,8 +11,8 @@
 //! Behold! The `TapSuite`
 //!
 //! ```
-//! use tap_rust::tap_test_builder::TapTestBuilder;
-//! use tap_rust::tap_suite_builder::TapSuiteBuilder;
+//! use testanything::tap_test_builder::TapTestBuilder;
+//! use testanything::tap_suite_builder::TapSuiteBuilder;
 //!
 //! // Cons up a failing test
 //! let failing_tap_test = TapTestBuilder::new()
@@ -21,7 +21,7 @@
 //!     .diagnostics(&vec!["This test failed because of X"])
 //!     .finalize();
 //!
-//! // 
+//! //
 //! let tap_suite = TapSuiteBuilder::new()
 //!     .name("Example TAP suite")
 //!     .tests(vec![failing_tap_test])
@@ -35,7 +35,7 @@
 //! Behold, the `TapWriter`!
 //!
 //! ```
-//! use tap_rust::tap_writer::TapWriter;
+//! use testanything::tap_writer::TapWriter;
 //!
 //! let writer = TapWriter::new("Example TAP stream");
 //!
@@ -66,13 +66,13 @@ const OK_SYMBOL: &str = "ok";
 /// Global constant for the "not ok"
 const NOT_OK_SYMBOL: &str = "not ok";
 
-/// `TapTest` -- The core, representing an individual TAP test.
-pub mod tap_test;
-/// `TapTestBuilder` -- Helper for creating a `TapTest` using the builder pattern.
-pub mod tap_test_builder;
 /// `TapSuite` -- A collection of `TapTest` objects renderable into a TAP text stream
 pub mod tap_suite;
 /// `TapTestBuilder` -- Helper for creating a `TapTestSuite` using the builder pattern
 pub mod tap_suite_builder;
+/// `TapTest` -- The core, representing an individual TAP test.
+pub mod tap_test;
+/// `TapTestBuilder` -- Helper for creating a `TapTest` using the builder pattern.
+pub mod tap_test_builder;
 /// `TapWriter` -- For writing TAP streams incrementally
 pub mod tap_writer;

@@ -1,5 +1,5 @@
 [package]
-name = "tap-rust"
+name = "testanything"
 version = "0.1.0"
 authors = ["Jonathan E. Magen <jonathan.magen@cigna.com>"]
 

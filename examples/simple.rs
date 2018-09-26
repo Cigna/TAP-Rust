@@ -1,8 +1,7 @@
+extern crate testanything;
 
-extern crate tap_rust;
-
-use tap_rust::tap_test_builder::TapTestBuilder;
-use tap_rust::tap_suite_builder::TapSuiteBuilder;
+use testanything::tap_suite_builder::TapSuiteBuilder;
+use testanything::tap_test_builder::TapTestBuilder;
 
 fn main() {
     // Make some tests
@@ -22,6 +21,6 @@ fn main() {
         .name("Example TAP Suite")
         .tests(vec![passing_test, failing_test])
         .finalize();
-    
+
     tap_suite.print();
 }

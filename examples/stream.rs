@@ -1,7 +1,6 @@
+extern crate testanything;
 
-extern crate tap_rust;
-
-use tap_rust::tap_writer::TapWriter;
+use testanything::tap_writer::TapWriter;
 
 fn main() {
     let writer = TapWriter::new("Example TAP stream");
@@ -17,7 +16,7 @@ fn main() {
     writer.ok(2, "Bamboo");
     writer.ok(3, "Curry");
     // This one failed, so explain why with a diagnostic line
-    writer.not_ok(4, "Noodle"); 
+    writer.not_ok(4, "Noodle");
     writer.diagnostic("The above test failed because of XYZ reason");
     writer.ok(5, "Tree");
 

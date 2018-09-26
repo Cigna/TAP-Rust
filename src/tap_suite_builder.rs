@@ -6,8 +6,8 @@ use tap_test::TapTest;
 /// # Examples
 ///
 /// ```
-/// use tap_rust::tap_suite_builder::TapSuiteBuilder;
-/// use tap_rust::tap_test_builder::TapTestBuilder;
+/// use testanything::tap_suite_builder::TapSuiteBuilder;
+/// use testanything::tap_test_builder::TapTestBuilder;
 ///
 /// // Make a Vec<TapTest> so we have something
 /// let tests = vec![TapTestBuilder::new()
@@ -32,7 +32,10 @@ pub struct TapSuiteBuilder {
 impl TapSuiteBuilder {
     /// Produce a new builder object
     pub fn new() -> TapSuiteBuilder {
-        TapSuiteBuilder { name: None, tests: None }
+        TapSuiteBuilder {
+            name: None,
+            tests: None,
+        }
     }
     /// Set the name
     pub fn name<S: Into<String>>(&mut self, s: S) -> &mut TapSuiteBuilder {
@@ -61,10 +64,12 @@ mod test {
 
     #[test]
     fn test_tap_suite_builder() {
-        let tests = vec![TapTestBuilder::new()
-                         .name("Example TAP test")
-                         .passed(true)
-                         .finalize()];
+        let tests = vec![
+            TapTestBuilder::new()
+                .name("Example TAP test")
+                .passed(true)
+                .finalize(),
+        ];
 
         let tap_suite_from_builder = TapSuiteBuilder::new()
             .name("Example TAP test suite")
@@ -73,10 +78,12 @@ mod test {
 
         let tap_suite_from_scratch = TapSuite {
             name: "Example TAP test suite".to_string(),
-            tests: vec![TapTestBuilder::new()
-                        .name("Example TAP test")
-                        .passed(true)
-                        .finalize()],
+            tests: vec![
+                TapTestBuilder::new()
+                    .name("Example TAP test")
+                    .passed(true)
+                    .finalize(),
+            ],
         };
 
         assert_eq!(tap_suite_from_builder, tap_suite_from_scratch);

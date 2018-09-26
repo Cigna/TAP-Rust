@@ -5,7 +5,7 @@ use tap_test::TapTest;
 /// # Examples
 ///
 /// ```
-/// use tap_rust::tap_test_builder::TapTestBuilder;
+/// use testanything::tap_test_builder::TapTestBuilder;
 ///
 /// let tap_test = TapTestBuilder::new()
 ///     .name("Panda test")
@@ -26,7 +26,7 @@ impl TapTestBuilder {
         TapTestBuilder {
             name: None,
             passed: None,
-            diagnostics: None
+            diagnostics: None,
         }
     }
     /// Set test name
@@ -47,8 +47,14 @@ impl TapTestBuilder {
     /// Produce the configured `TapTest` object. Panics if you don't pass a passed status.
     pub fn finalize(&mut self) -> TapTest {
         TapTest {
-            name: self.name.take().unwrap_or_else(|| "A test has no name".to_string()),
-            passed: self.passed.take().expect("You build a test but didn't say whether or not it passed"),
+            name: self
+                .name
+                .take()
+                .unwrap_or_else(|| "A test has no name".to_string()),
+            passed: self
+                .passed
+                .take()
+                .expect("You build a test but didn't say whether or not it passed"),
             diagnostics: self.diagnostics.take().unwrap_or_else(Vec::new),
         }
     }
@@ -58,7 +64,7 @@ impl TapTestBuilder {
 mod tests {
     use super::TapTestBuilder;
     use tap_test::TapTest;
-    
+
     #[test]
     fn test_tap_test_builder() {
         let tap_test_from_builder = TapTestBuilder::new()
@@ -78,9 +84,7 @@ mod tests {
 
     #[test]
     fn test_tap_test_builder_with_no_name() {
-        let bad_tap_test = TapTestBuilder::new()
-            .passed(true)
-            .finalize();
+        let bad_tap_test = TapTestBuilder::new().passed(true).finalize();
 
         let expected = "A test has no name";
         assert_eq!(bad_tap_test.name, expected);
@@ -89,8 +93,6 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_tap_test_builder_with_no_passed_status() {
-        TapTestBuilder::new()
-            .name("This should break")
-            .finalize();
+        TapTestBuilder::new().name("This should break").finalize();
     }
 }
