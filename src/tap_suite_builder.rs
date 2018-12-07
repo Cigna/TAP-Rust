@@ -1,5 +1,5 @@
-use tap_suite::TapSuite;
-use tap_test::TapTest;
+use crate::tap_suite::TapSuite;
+use crate::tap_test::TapTest;
 
 /// Coordinator for constructing `TapSuite` objects using the builder pattern.
 ///
@@ -59,17 +59,15 @@ impl TapSuiteBuilder {
 #[cfg(test)]
 mod test {
     use super::TapSuiteBuilder;
-    use tap_suite::TapSuite;
-    use tap_test_builder::TapTestBuilder;
+    use crate::tap_suite::TapSuite;
+    use crate::tap_test_builder::TapTestBuilder;
 
     #[test]
     fn test_tap_suite_builder() {
-        let tests = vec![
-            TapTestBuilder::new()
-                .name("Example TAP test")
-                .passed(true)
-                .finalize(),
-        ];
+        let tests = vec![TapTestBuilder::new()
+            .name("Example TAP test")
+            .passed(true)
+            .finalize()];
 
         let tap_suite_from_builder = TapSuiteBuilder::new()
             .name("Example TAP test suite")
@@ -78,12 +76,10 @@ mod test {
 
         let tap_suite_from_scratch = TapSuite {
             name: "Example TAP test suite".to_string(),
-            tests: vec![
-                TapTestBuilder::new()
-                    .name("Example TAP test")
-                    .passed(true)
-                    .finalize(),
-            ],
+            tests: vec![TapTestBuilder::new()
+                .name("Example TAP test")
+                .passed(true)
+                .finalize()],
         };
 
         assert_eq!(tap_suite_from_builder, tap_suite_from_scratch);

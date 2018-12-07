@@ -1,4 +1,4 @@
-use tap_test::TapTest;
+use crate::tap_test::TapTest;
 
 /// Represents a collection of TAP tests (`TapTest`) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
 #[derive(Debug, Clone)]
@@ -35,16 +35,15 @@ impl TapSuite {
 
 impl PartialEq for TapSuite {
     fn eq(&self, other: &TapSuite) -> bool {
-        self.name == other.name
-            && self.tests == other.tests
+        self.name == other.name && self.tests == other.tests
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::TapSuite;
-    use tap_test_builder::TapTestBuilder;
-    
+    use crate::tap_test_builder::TapTestBuilder;
+
     #[test]
     fn test_lines() {
         let passing_test = TapTestBuilder::new()
@@ -68,11 +67,10 @@ mod tests {
             "ok 1 Panda Bamboo",
             "not ok 2 Curry Noodle",
             "# Tree",
-            "# Flower"
+            "# Flower",
         ];
         let actual = tap_suite.lines();
-        
-        assert_eq!(expected, actual);
 
+        assert_eq!(expected, actual);
     }
 }

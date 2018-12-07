@@ -1,4 +1,4 @@
-use tap_test::TapTest;
+use crate::tap_test::TapTest;
 
 /// Coordinator for construction of `TapTest` objects using the builder pattern.
 ///
@@ -63,7 +63,7 @@ impl TapTestBuilder {
 #[cfg(test)]
 mod tests {
     use super::TapTestBuilder;
-    use tap_test::TapTest;
+    use crate::tap_test::TapTest;
 
     #[test]
     fn test_tap_test_builder() {

@@ -1,4 +1,4 @@
-use super::{OK_SYMBOL, NOT_OK_SYMBOL};
+use super::{NOT_OK_SYMBOL, OK_SYMBOL};
 
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
 #[derive(Debug, Clone)]
@@ -33,7 +33,8 @@ impl TapTest {
         // Build the first line
         let mut lines = vec![self.status_line(test_number)];
         // If there are diagnostics lines, format them.
-        let formatted_diagnostics = self.diagnostics
+        let formatted_diagnostics = self
+            .diagnostics
             .iter()
             .map(|comment| self.format_diagnostics(comment))
             .collect::<Vec<String>>();
@@ -59,19 +60,18 @@ impl PartialEq for TapTest {
 
 impl Into<String> for TapTest {
     fn into(self) -> String {
-        format!("TapTest(name: {}, passed: {}, diagnostics: {:?})",
-                self.name,
-                self.passed,
-                self.diagnostics)
+        format!(
+            "TapTest(name: {}, passed: {}, diagnostics: {:?})",
+            self.name, self.passed, self.diagnostics
+        )
     }
 }
-
 
 #[cfg(test)]
 mod tests {
     use super::TapTest;
-    use ::OK_SYMBOL;
-    use ::NOT_OK_SYMBOL;
+    use crate::NOT_OK_SYMBOL;
+    use crate::OK_SYMBOL;
 
     #[test]
     fn test_tap_test_status_string() {
@@ -121,7 +121,6 @@ mod tests {
         let actual_failing = tap_test_failing.status_line(42);
 
         assert_eq!(expected_failing, actual_failing);
-
     }
 
     #[test]
