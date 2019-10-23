@@ -1,11 +1,12 @@
 [package]
 name = "testanything"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Jonathan E. Magen <jonathan.magen@cigna.com>"]
 edition = "2018"
 description = "Generate results in the Test Anything Protocol (TAP)"
 license = "Apache-2.0"
 homepage = "https://github.com/cigna/tap-rust"
 repository = "https://github.com/cigna/tap-rust"
+readme = "README.md"
 
 [dependencies]
