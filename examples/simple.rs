@@ -3,6 +3,8 @@ extern crate testanything;
 use testanything::tap_suite_builder::TapSuiteBuilder;
 use testanything::tap_test_builder::TapTestBuilder;
 
+use std::io;
+
 fn main() {
     // Make some tests
     let passing_test = TapTestBuilder::new()
@@ -22,5 +24,8 @@ fn main() {
         .tests(vec![passing_test, failing_test])
         .finalize();
 
-    tap_suite.print();
+    match tap_suite.print(io::stdout().lock()) {
+        Ok(_) => {}
+        Err(reason) => eprintln!("{}", reason),
+    }
 }

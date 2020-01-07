@@ -1,6 +1,6 @@
 //! The Test Anything Protocol (TAP) is a plaintext format for expressing test results. It has been around since 1987 when it was invented to help test Perl. With this crate, this wonderfully-useful tool has been brought to Rust!
 //!
-//! This crate provides the machinery needed for producing and emitting TAP streams. Since the TAP specification requires that TAP be emitted to STDOUT, we don't get fancy with any of the stream interfaces.
+//! This crate provides the machinery needed for producing and emitting TAP streams.
 //!
 //! For working, executable examples, please see the `examples` directory.
 //!
@@ -14,23 +14,29 @@
 //! use testanything::tap_test_builder::TapTestBuilder;
 //! use testanything::tap_suite_builder::TapSuiteBuilder;
 //!
-//! // Cons up a failing test
+//! use std::io;
+//!
+//! // Build a failing test
 //! let failing_tap_test = TapTestBuilder::new()
 //!     .name("Example TAP test")
 //!     .passed(false)
 //!     .diagnostics(&vec!["This test failed because of X"])
 //!     .finalize();
 //!
-//! //
+//! // Construct a test result suite
 //! let tap_suite = TapSuiteBuilder::new()
 //!     .name("Example TAP suite")
 //!     .tests(vec![failing_tap_test])
 //!     .finalize();
 //!
-//! tap_suite.print();
+//! // Print TAP to standard output in one chunk
+//! match tap_suite.print(io::stdout().lock()) {
+//!     Ok(_) => {}
+//!     Err(reason) => eprintln!("{}", reason),
+//! }
 //! ```
 //!
-//! The second method uses the `TapWriter` facility and may be thought of as the direct approach. This mechanism allows you to write a semi-customizable TAP stream to STDOUT from anywhere in your program.
+//! The second method uses the `TapWriter` facility and may be thought of as the direct approach. This mechanism allows you to write a semi-customizable TAP stream to STDOUT from anywhere in your program. Since the TAP specification requires that TAP be emitted to STDOUT, the `TapWriter` doesn't get fancy with any of the stream interfaces.
 //!
 //! Behold, the `TapWriter`!
 //!

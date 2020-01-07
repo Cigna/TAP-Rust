@@ -20,7 +20,9 @@ not ok 2 Curry Noodle
 
 ## Testing
 
-`cargo test`
+```shell
+cargo test
+```
 
 ## License
 

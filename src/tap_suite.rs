@@ -1,5 +1,7 @@
 use crate::tap_test::TapTest;
 
+use std::io::Write;
+
 /// Represents a collection of TAP tests (`TapTest`) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
 #[derive(Debug, Clone)]
 pub struct TapSuite {
@@ -25,10 +27,12 @@ impl TapSuite {
         all_lines
     }
 
-    /// Emit TAP stream to standard output.
-    pub fn print(&self) {
-        for line in self.lines() {
-            println!("{}", line);
+    /// Emit TAP stream to the provided sink, which must be `Write`.
+    pub fn print<T: Write>(&self, mut sink: T) -> Result<String, String> {
+        let output = self.lines().join("");
+        match sink.write_all(output.as_bytes()) {
+            Ok(_) => Result::Ok(output),
+            Err(reason) => Result::Err(reason.to_string()),
         }
     }
 }

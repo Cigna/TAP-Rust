@@ -1,4 +1,4 @@
-use super::{NOT_OK_SYMBOL, OK_SYMBOL};
+use crate::{NOT_OK_SYMBOL, OK_SYMBOL};
 
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
 #[derive(Debug, Clone)]
