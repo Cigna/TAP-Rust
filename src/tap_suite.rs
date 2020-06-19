@@ -29,7 +29,7 @@ impl TapSuite {
 
     /// Emit TAP stream to the provided sink, which must be `Write`.
     pub fn print<T: Write>(&self, mut sink: T) -> Result<String, String> {
-        let output = self.lines().join("");
+        let output = self.lines().join("\n");
         match sink.write_all(output.as_bytes()) {
             Ok(_) => Result::Ok(output),
             Err(reason) => Result::Err(reason.to_string()),
