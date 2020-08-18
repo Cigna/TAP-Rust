@@ -10,16 +10,3 @@ repository = "https://github.com/cigna/tap-rust"
 readme = "README.md"
 
 [dependencies]
-
-[dev-dependencies.cargo-husky]
-version = "1"
-default-features = false # Disable features which are enabled by default
-features = [
-  "precommit-hook",
-  "prepush-hook",
-  "run-for-all",
-  "run-cargo-test",
-  "run-cargo-clippy",
-  "run-cargo-fmt",
-  "run-cargo-check"
-]
