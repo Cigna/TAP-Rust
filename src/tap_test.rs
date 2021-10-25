@@ -1,7 +1,7 @@
 use crate::{NOT_OK_SYMBOL, OK_SYMBOL};
 
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct TapTest {
     /// The name of the test, will be the primary text on a TAP test line
     pub name: String,
@@ -50,19 +50,11 @@ impl TapTest {
     }
 }
 
-impl PartialEq for TapTest {
-    fn eq(&self, other: &TapTest) -> bool {
-        self.name == other.name
-            && self.passed == other.passed
-            && self.diagnostics == other.diagnostics
-    }
-}
-
-impl Into<String> for TapTest {
-    fn into(self) -> String {
+impl From<TapTest> for String {
+    fn from(tap_test: TapTest) -> String {
         format!(
             "TapTest(name: {}, passed: {}, diagnostics: {:?})",
-            self.name, self.passed, self.diagnostics
+            tap_test.name, tap_test.passed, tap_test.diagnostics
         )
     }
 }
