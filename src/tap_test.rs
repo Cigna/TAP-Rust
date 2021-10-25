@@ -51,7 +51,7 @@ impl TapTest {
 }
 
 impl From<TapTest> for String {
-    fn from(tap_test: TapTest) -> String {
+    fn from(tap_test: TapTest) -> Self {
         format!(
             "TapTest(name: {}, passed: {}, diagnostics: {:?})",
             tap_test.name, tap_test.passed, tap_test.diagnostics
