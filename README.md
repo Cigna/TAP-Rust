@@ -18,6 +18,11 @@ not ok 2 Curry Noodle
 # Flower
 ```
 
+### Use with `alloc` only (`#[no_std]`)
+
+To use this crate with alloc in `#[no_std]`, use:
+  testanything = { version = "*", default-features = false, features = ["alloc"] }
+
 ## Testing
 
 ```shell

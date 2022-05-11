@@ -1,3 +1,10 @@
+#[cfg(feature = "alloc")]
+use alloc::{
+    string::{String, ToString},
+    vec::Vec,
+};
+use core::{default::Default, option::Option};
+
 use crate::tap_test::TapTest;
 
 /// Coordinator for construction of `TapTest` objects using the builder pattern.

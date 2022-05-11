@@ -10,3 +10,13 @@ repository = "https://github.com/cigna/tap-rust"
 readme = "README.md"
 
 [dependencies]
+
+[features]
+default = ["std"]
+
+# Provide all features. Requires a dependency on the Rust standard library.
+std = []
+
+# Provide everything except printing to stdout. Uses `alloc`, which is a subset
+# of std but may be enabled without depending on all of std.
+alloc = []

@@ -1,3 +1,11 @@
+#[cfg(feature = "alloc")]
+use alloc::{
+    string::{String, ToString},
+    vec::Vec,
+};
+
+use core::option::Option;
+
 use crate::tap_suite::TapSuite;
 use crate::tap_test::TapTest;
 
