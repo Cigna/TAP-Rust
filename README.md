@@ -21,7 +21,8 @@ not ok 2 Curry Noodle
 ### Use with `alloc` only (`#[no_std]`)
 
 To use this crate with alloc in `#[no_std]`, use:
-  testanything = { version = "*", default-features = false, features = ["alloc"] }
+
+`testanything = { version = "*", default-features = false, features = ["alloc"] }`
 
 ## Testing
 
