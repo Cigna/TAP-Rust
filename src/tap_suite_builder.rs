@@ -51,7 +51,7 @@ impl TapSuiteBuilder {
     pub fn finalize(&mut self) -> TapSuite {
         TapSuite {
             name: self.name.take().unwrap_or_else(|| "".to_string()),
-            tests: self.tests.take().unwrap_or_else(Vec::new),
+            tests: self.tests.take().unwrap_or_default(),
         }
     }
 }

@@ -55,7 +55,7 @@ impl TapTestBuilder {
                 .passed
                 .take()
                 .expect("You build a test but didn't say whether or not it passed"),
-            diagnostics: self.diagnostics.take().unwrap_or_else(Vec::new),
+            diagnostics: self.diagnostics.take().unwrap_or_default(),
         }
     }
 }
