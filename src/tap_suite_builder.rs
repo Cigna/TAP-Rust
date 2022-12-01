@@ -50,7 +50,7 @@ impl TapSuiteBuilder {
     /// Produce the configured `TapSuite` object. Name defaults to a blank `String` and the tests default to an empty `Vec`.
     pub fn finalize(&mut self) -> TapSuite {
         TapSuite {
-            name: self.name.take().unwrap_or_else(|| "".to_string()),
+            name: self.name.take().unwrap_or_default(),
             tests: self.tests.take().unwrap_or_default(),
         }
     }

@@ -1,7 +1,7 @@
 use crate::{NOT_OK_SYMBOL, OK_SYMBOL};
 
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct TapTest {
     /// The name of the test, will be the primary text on a TAP test line
     pub name: String,
