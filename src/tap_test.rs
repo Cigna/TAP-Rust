@@ -1,3 +1,11 @@
+#[cfg(feature = "alloc")]
+use alloc::{
+    string::{String, ToString},
+    vec,
+    vec::Vec,
+};
+use core::fmt::Write;
+
 use crate::{NOT_OK_SYMBOL, OK_SYMBOL};
 
 /// A test, a collection of which (a `TapSuite`) will be rendered into a TAP text stream. A `TapTest` knows how to render itself.
@@ -25,7 +33,12 @@ impl TapTest {
 
     /// Produce a properly-formatted TAP line. This excludes diagnostics.
     pub fn status_line(&self, test_number: i64) -> String {
-        format!("{} {} {}", self.ok_string(), test_number, self.name)
+        let ok_string = self.ok_string();
+        let test_number_string = test_number.to_string();
+        let mut buf =
+            String::with_capacity(ok_string.len() + test_number_string.len() + self.name.len());
+        write!(&mut buf, "{} {} {}", ok_string, test_number, self.name).unwrap();
+        buf
     }
 
     /// Produce all lines (inclusive of diagnostics) representing this test. This is the money, right here.
@@ -46,16 +59,22 @@ impl TapTest {
 
     /// Diagnostics should begin with a # mark
     pub fn format_diagnostics(&self, line: &str) -> String {
-        format!("# {}", line)
+        let mut buf = String::with_capacity(line.len() + 2);
+        write!(&mut buf, "# {}", line).unwrap();
+        buf
     }
 }
 
 impl From<TapTest> for String {
     fn from(tap_test: TapTest) -> Self {
-        format!(
+        let mut buf = String::new();
+        write!(
+            &mut buf,
             "TapTest(name: {}, passed: {}, diagnostics: {:?})",
             tap_test.name, tap_test.passed, tap_test.diagnostics
         )
+        .unwrap();
+        buf
     }
 }
 

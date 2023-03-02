@@ -67,6 +67,11 @@
 //!
 //!
 
+// Support using TAP without the standard library
+#![cfg_attr(not(feature = "std"), no_std)]
+#[cfg(all(feature = "alloc", not(feature = "std")))]
+extern crate alloc;
+
 /// Global constant for the "ok"
 const OK_SYMBOL: &str = "ok";
 /// Global constant for the "not ok"
@@ -80,5 +85,6 @@ pub mod tap_suite_builder;
 pub mod tap_test;
 /// `TapTestBuilder` -- Helper for creating a `TapTest` using the builder pattern.
 pub mod tap_test_builder;
+#[cfg(feature = "std")]
 /// `TapWriter` -- For writing TAP streams incrementally
 pub mod tap_writer;

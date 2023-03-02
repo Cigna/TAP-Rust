@@ -1,6 +1,9 @@
-use crate::tap_test::TapTest;
-
+#[cfg(feature = "alloc")]
+use alloc::{format, string::String, vec, vec::Vec};
+#[cfg(feature = "std")]
 use std::io::Write;
+
+use crate::tap_test::TapTest;
 
 /// Represents a collection of TAP tests (`TapTest`) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
 #[derive(Debug, Clone)]
@@ -26,11 +29,14 @@ impl TapSuite {
 
         all_lines
     }
+}
 
+#[cfg(feature = "std")]
+impl TapSuite {
     /// Emit TAP stream to the provided sink, which must be `Write`.
     pub fn print<T: Write>(&self, mut sink: T) -> Result<String, String> {
         let output = self.lines().join("\n");
-        match sink.write_all(output.as_bytes()) {
+        match write!(&mut sink, "{}", output) {
             Ok(_) => Result::Ok(output),
             Err(reason) => Result::Err(reason.to_string()),
         }
