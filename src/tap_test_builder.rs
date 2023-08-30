@@ -1,3 +1,5 @@
+//! `TapTestBuilder` -- Helper for creating a `TapTestSuite` using the builder pattern
+
 #[cfg(feature = "alloc")]
 use alloc::{
     string::{String, ToString},

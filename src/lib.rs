@@ -60,13 +60,15 @@
 //! writer.diagnostic("The above test failed because of XYZ reason");
 //! writer.ok(5, "Tree");
 //!
-//! // uh oh! something went horribly wrong and we need to stop before
+//! // Uh oh! something went horribly wrong and we need to stop before
 //! // we print out the results from test 6!
 //! writer.bail_out_with_message("Destabilized warp core! Can't continue!");
 //! ```
 //!
 //!
 
+#![forbid(unsafe_code)]
+#![deny(clippy::all)]
 // Support using TAP without the standard library
 #![cfg_attr(not(feature = "std"), no_std)]
 #[cfg(all(feature = "alloc", not(feature = "std")))]
@@ -77,14 +79,9 @@ const OK_SYMBOL: &str = "ok";
 /// Global constant for the "not ok"
 const NOT_OK_SYMBOL: &str = "not ok";
 
-/// `TapSuite` -- A collection of `TapTest` objects renderable into a TAP text stream
 pub mod tap_suite;
-/// `TapTestBuilder` -- Helper for creating a `TapTestSuite` using the builder pattern
 pub mod tap_suite_builder;
-/// `TapTest` -- The core, representing an individual TAP test.
 pub mod tap_test;
-/// `TapTestBuilder` -- Helper for creating a `TapTest` using the builder pattern.
 pub mod tap_test_builder;
 #[cfg(feature = "std")]
-/// `TapWriter` -- For writing TAP streams incrementally
 pub mod tap_writer;

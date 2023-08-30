@@ -1,3 +1,5 @@
+//! `TapWriter` -- For writing TAP streams incrementally
+
 use super::{NOT_OK_SYMBOL, OK_SYMBOL};
 
 /// A named TAP stream writer. This will print directly to STDOUT as you call methods. No waiting.

@@ -1,3 +1,5 @@
+//! `TapSuite` -- A collection of `TapTest` objects renderable into a TAP text stream
+
 #[cfg(feature = "alloc")]
 use alloc::{format, string::String, vec, vec::Vec};
 #[cfg(feature = "std")]
@@ -6,7 +8,7 @@ use std::io::Write;
 use crate::tap_test::TapTest;
 
 /// Represents a collection of TAP tests (`TapTest`) which can be rendered into a (text) TAP stream. This orchestrates that rendering.
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct TapSuite {
     /// The name of the suite. If this is a blank string, that's fine but it's considered a party foul.
     pub name: String,
@@ -40,12 +42,6 @@ impl TapSuite {
             Ok(_) => Result::Ok(output),
             Err(reason) => Result::Err(reason.to_string()),
         }
-    }
-}
-
-impl PartialEq for TapSuite {
-    fn eq(&self, other: &TapSuite) -> bool {
-        self.name == other.name && self.tests == other.tests
     }
 }
 

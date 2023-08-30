@@ -1,3 +1,5 @@
+//! `TapTest` -- The core, representing an individual TAP test.
+
 #[cfg(feature = "alloc")]
 use alloc::{
     string::{String, ToString},
@@ -5,6 +7,7 @@ use alloc::{
     vec::Vec,
 };
 use core::fmt::Write;
+use std::fmt;
 
 use crate::{NOT_OK_SYMBOL, OK_SYMBOL};
 
@@ -22,13 +25,12 @@ pub struct TapTest {
 impl TapTest {
     /// Based on the test passing status, yield either "ok" or "not ok".
     pub fn ok_string(&self) -> String {
-        let result = if self.passed {
+        if self.passed {
             OK_SYMBOL
         } else {
             NOT_OK_SYMBOL
-        };
-
-        result.to_string()
+        }
+        .to_string()
     }
 
     /// Produce a properly-formatted TAP line. This excludes diagnostics.
@@ -78,11 +80,28 @@ impl From<TapTest> for String {
     }
 }
 
+impl From<&TapTest> for String {
+    fn from(tap_test: &TapTest) -> Self {
+        let mut buf = String::new();
+        write!(
+            &mut buf,
+            "TapTest(name: {}, passed: {}, diagnostics: {:?})",
+            tap_test.name, tap_test.passed, tap_test.diagnostics
+        )
+        .unwrap();
+        buf
+    }
+}
+
+impl fmt::Display for TapTest {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", String::from(self))
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use super::TapTest;
-    use crate::NOT_OK_SYMBOL;
-    use crate::OK_SYMBOL;
+    use super::*;
 
     #[test]
     fn test_tap_test_status_string() {
